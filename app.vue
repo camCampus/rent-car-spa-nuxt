@@ -7,11 +7,10 @@
 </template>
 
 <script>
-import {useUsersStore} from '/stores/users'
+import {useUserStore} from '/stores/users'
 export default {
   setup() {
-
-    const uStore = useUsersStore()
+    const uStore = useUserStore()
     return {uStore}
   },
    created() {
