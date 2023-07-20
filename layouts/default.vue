@@ -1,13 +1,10 @@
 <template>
   <div>
-    <NuxtLink to="/">
-      home
-    </NuxtLink>
-    <NuxtLink to="/about">
-      About page
-    </NuxtLink>
+    <div class="w-full p-8 bg-gray-950 text-white flex justify-around">
+      <NuxtLink to="/">
+        Home
+      </NuxtLink>
+    </div>
     <slot/>
   </div>
 </template>
-<script setup>
-</script>
