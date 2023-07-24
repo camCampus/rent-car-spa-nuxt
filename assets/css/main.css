@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background: #272525;
+    color: white;
+}
+
+.main-block {
+    height: 100vh;
+    background-image: url('/casey-horner-JYl_VbBdobw-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

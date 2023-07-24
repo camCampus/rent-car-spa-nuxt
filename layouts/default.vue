@@ -1,10 +1,23 @@
 <template>
-  <div>
-    <div class="w-full p-8 bg-gray-950 text-white flex justify-around">
-      <NuxtLink to="/">
-        Home
-      </NuxtLink>
-    </div>
-    <slot/>
-  </div>
+  <header>
+    <nav-bar />
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer>
+    <footerr />
+  </footer>
+
 </template>
+
+<script>
+import NavBar from "../../rent-car-spa-nuxt/layouts/navBar.vue";
+import Footerr from "../../rent-car-spa-nuxt/layouts/footerr.vue";
+
+export default defineComponent({
+  components: {Footerr, NavBar}
+})
+</script>
