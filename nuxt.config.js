@@ -1,17 +1,25 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules:[
+    modules: [
         '@nuxtjs/tailwindcss',
         '@pinia/nuxt'
     ],
     tailwindcss: {
         exposeConfig: true,
-        configPath: '~/config/tailwind.js'
+        configPath: '~/tailwind.config.js'
     },
     css:[
         '~/assets/fonts/Orbitron.css',
-        '~/assets/fonts/Oswald.css'
+        '~/assets/fonts/Oswald.css',
+        '~/assets/css/tailwind.css',
+        "~/assets/css/main.css"
     ],
+    postcss: {
+        plugins: {
+            tailwindcss: {},
+            autoprefixer: {}
+        }
+    },
     buildModules: [
         '@nuxtjs/google-fonts',
         {
@@ -26,7 +34,6 @@ export default defineNuxtConfig({
             display: 'swap',
             download: true
         }
-
     ],
     devtools: {enabled: true},
     ssr: false,
