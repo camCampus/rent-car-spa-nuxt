@@ -3,13 +3,9 @@ import reservationRepository from "~/repository/reservationRepository";
 export const useReservationStore = defineStore('reservations', {
     state: () => ({
         baseUrl:'http://172.10.230.10:80823',
-        reservationList:[],
         resaForDate:[]
     }),
     actions: {
-        async getAllReservations() {
-            this.reservationList = await reservationRepository.getReservations();
-        },
         async getForDate(start, end) {
             this.resaForDate = await reservationRepository.getForUserDates(start, end)
         }
