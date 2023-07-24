@@ -7,6 +7,9 @@
   <!-- Section des voitures en vedette -->
   <StarCars />
 
+  <!-- Section avis -->
+  <avis />
+
   <!-- Section de contact -->
   <Contact />
 
@@ -18,9 +21,10 @@ import {defineComponent} from 'vue'
 import ReservationSetup from "~/components/home/ReservationSetup.vue";
 import StarCars from "~/components/home/StarCars.vue";
 import MainBlock from "~/components/home/Main-block.vue";
+import Avis from "../components/home/avis.vue";
 
 export default defineComponent({
   name: "test",
-  components: {MainBlock, StarCars, ReservationSetup}
+  components: {Avis, MainBlock, StarCars, ReservationSetup}
 })
 </script>
