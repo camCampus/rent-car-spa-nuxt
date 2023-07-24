@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     ],
     tailwindcss: {
         exposeConfig: true,
-        configPath: '~/config/tailwind.js'
+        configPath:'./tailwind.config.js'
     },
     css:[
         '~/assets/fonts/Orbitron.css',

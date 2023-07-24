@@ -20,13 +20,7 @@ export default {
     const reservationStore = useReservationStore()
     return {vehicleStore, reservationStore}
   },
-  data() {
-    return {
-      resa: []
-    }
-  },
   created() {
-    console.log(this.resa)
     this.vehicleStore.getAllVehicles()
     this.reservationStore.getForDate('2023-12-15', '2023-12-30')
   },
@@ -39,11 +33,5 @@ export default {
       return this.reservationStore.resaForDate
     }
   },
-  methods: {
-    async getRes(s,e) {
-      this.resa = await fetch('http://172.10.230.10:8083/reservations/AviaibleVehicles' + '?dateDebut='+ s + '&dateFin=' + e)
-    }
-  },
-
 }
 </script>
