@@ -31,8 +31,14 @@ export default defineNuxtConfig({
     devtools: {enabled: true},
     ssr: false,
     routeRules: {
-        '/api/**': {
-            proxy: {to: "http://172.10.230.30:8084/**"}
+        '/api/users': {
+            proxy: {to: "http://172.10.230.30:8084/users"}
+        },
+        '/api/vehicles': {
+            proxy: {to:"http://172.10.230.20:8082/vehicles"}
+        },
+        '/api/reservations/**': {
+            proxy: {to:"http://172.10.230.10:8083/reservations/**"}
         }
     }
 })
