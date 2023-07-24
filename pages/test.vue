@@ -2,13 +2,13 @@
   <body class="bg-colorBackground">
 
   <!-- Section principale -->
-  <main-block />
+<main-block />
 
   <!-- Section des voitures en vedette -->
   <StarCars />
 
   <!-- Section de contact -->
-  <Contact />
+ <Contact />
 
   </body>
 </template>
