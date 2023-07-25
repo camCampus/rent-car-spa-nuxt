@@ -1,12 +1,35 @@
-<script lang="ts">
+<script>
 import {defineComponent} from 'vue'
-
+import {useReservationStore} from "~/stores/reservations";
 export default defineComponent({
   name: "ReservationSetup",
+  setup() {
+    const reservationStore = useReservationStore()
+    return {reservationStore}
+  },
+  data() {
+    return {
+      startDate:'',
+      endDate: '',
+    }
+  },
   methods: {
+     async getAvailableCars() {
+      if (this.startDate !== '' && this.endDate !== '') {
+         this.redirectToPage()
+      } else {
+
+      }
+    },
     redirectToPage() {
       // Remplacez '/autre-page' par le chemin de la page vers laquelle vous souhaitez rediriger.
-      this.$router.push('/about');
+      this.$router.push({
+        path:'/reservation/listVehicles',
+        query: {
+          start: this.startDate,
+          end: this.endDate
+        }
+      });
     }
   }
 })
@@ -38,7 +61,7 @@ export default defineComponent({
         </label>
         <input
             class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
-            id="start-date" type="date" placeholder="Date début">
+            id="start-date" type="date" placeholder="Date début" v-model="startDate" >
       </div>
 
       <div class="md:w-1/3 px-3 mt-2">
@@ -47,13 +70,13 @@ export default defineComponent({
         </label>
         <input
             class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
-            id="end-date" type="date" placeholder="Date fin">
+            id="end-date" type="date" placeholder="Date fin" v-model="endDate">
       </div>
 
     </div>
     <div class="reservastion-setup-button">
       <button
-          @click="redirectToPage"
+          @click="getAvailableCars"
           class=" appearance-none bg-colorNuxt-green hover:bg-colorBackground text-white font-bold py-3 px-4 rounded md:w-1/5"
       >
         Soumettre
