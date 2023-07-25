@@ -7,7 +7,7 @@ export const useReservationStore = defineStore('reservations', {
     }),
     actions: {
         async getVehiclesForDates(start, end) {
-            this.resaForDate = await reservationRepository.getForUserDates(start, end)
+            this.vehiclesList = await reservationRepository.getForUserDates(start, end)
         }
     }
 })

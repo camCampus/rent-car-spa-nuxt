@@ -9,22 +9,20 @@ export default defineComponent({
     return {reservationStore}
   },
  created() {
-   console.log('startDate',this.$route.query.start)
-   console.log('endDate',this.$route.query.end)
    this.s = this.$route.query.start
    this.e = this.$route.query.end
-   this.reservationStore.getVehiclesForDates(this.$route.query.start, this.$route.query.end)
+   this.reservationStore.getVehiclesForDates(this.s, this.e)
  },
-  methods() {
-    async getVehicleList() {
-      return await this.reservationStore.vehiclesList
+  methods: {
+     async getVehicleList() {
+        this.list = await this.reservationStore.vehiclesList
     }
   },
 data() {
     return {
       s: '',
       e:'',
-      list : this.getVehicleList
+      list : []
     }
 }
 })
@@ -32,8 +30,11 @@ data() {
 
 <template>
   <pre>
-{{list}}
+    {{this.getVehicleList()}}
   </pre>
+<div v-for="item in list">
+  <card/>
+</div>
 </template>
 
 <style scoped>
