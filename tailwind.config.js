@@ -17,11 +17,12 @@ export default {
                 'colorPrimary': "#C1BDB3",
                 'colorSecondary': "#323031",
                 'colorTextLight': "#ffffff",
-                'colorTextDark': "#ffffff"
+                'colorTextDark': "#000000"
             },
             fontFamily: {
+                'sans': ['Oswald', ...defaultTheme.fontFamily.sans],
                 'heading':['Orbitron'],
-                'oswald':['Oswald']
+                // 'oswald':['Oswald']
             }
         }
     },
