@@ -39,7 +39,7 @@ services:
       - mysqldb
 
   vehicle:
-    image: camcampus/rent-vehicle-service:first
+    image: camcampus/rent-vehicle-service-v4:first
     networks:
       spring:
         ipv4_address: 172.10.230.20

@@ -1,8 +1,8 @@
-
 <template>
   <div class="reserv_form_container flex flex-col items-center justify-center my-4">
     <h1 class="reservation_form font-bold text-2xl"> Formulaire de réservation </h1>
-    <p class="text-center m-1 mx-4"> Merci de remplir ces informations pour que nous puissions vous réserver une belle voiture </p>
+    <p class="text-center m-1 mx-4"> Merci de remplir ces informations pour que nous puissions vous réserver une belle
+      voiture </p>
 
     <section class="w-80 sm:w-80">
       <form class="max-w-lg mx-auto mt-8" @submit.prevent="submitForm">
@@ -24,6 +24,17 @@
               type="text"
               id="prenom"
               v-model="prenom"
+              class="w-full h-9 text-colorTextDark rounded-md bg-colorPrimary "
+              required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="date" class=" font-medium mb-1">Date de naissance :</label>
+          <input
+              type="date"
+              id="date"
+              v-model="date"
               class="w-full h-9 text-colorTextDark rounded-md bg-colorPrimary "
               required
           />
@@ -63,11 +74,22 @@
         </div>
 
         <div class="mb-4">
+          <label for="estimKm" class=" font-medium mb-1">Estimation des km*</label>
+          <input
+              type="text"
+              id="estimKm"
+              v-model="estimKm"
+              class="w-full h-9 text-colorTextDark rounded-md bg-colorPrimary"
+              required
+          />
+        </div>
+
+        <div class="mb-4">
           <label for="raisonLocation" class=" font-medium mb-1">Raison de la location :</label>
           <select
               id="raisonLocation"
               v-model="raisonLocation"
-              class="w-full h-9 text-colorTextDark rounded-md bg-colorPrimary text-colorTextDark"
+              class="w-full h-9 text-colorTextDark rounded-md bg-colorPrimary pl-2"
               required
           >
             <option value="" disabled selected>Choisissez une option</option>
@@ -83,7 +105,7 @@
           <textarea
               id="message"
               v-model="message"
-              class="w-full h-40 rounded-md bg-colorPrimary"
+              class="w-full h-40 rounded-md bg-colorPrimary text-colorTextDark p-1.5"
               placeholder="Dites nous si vous avez des informations particulières à nous faire savoir"
           >
           </textarea>
@@ -92,7 +114,7 @@
         <div class="text-center">
           <button
               type="submit"
-              class="py-2 w-80 h-14 px-4 bg-colorNuxt-green hover:bg-colorPrimary text-white rounded-md bg-colorNuxt-green focus:ring focus:colorNuxt-green focus:ring-opacity-50"
+              class="py-2 w-80 h-14 px-4 bg-colorNuxt-green hover:bg-colorPrimary text-white rounded-md focus:ring focus:colorNuxt-green focus:ring-opacity-50"
               @click.prevent="submitForm"
           >
             Valider et passer au paiement
@@ -101,63 +123,123 @@
       </form>
     </section>
 
-
+    <!-- Affichage du message d'erreur -->
+    <div v-if="showError" class="text-red-500 bg-colorSecondary w-fit p-2 rounded-md font-medium text-center mt-4">
+      Veuillez remplir tous les champs requis avant de soumettre le formulaire.
+    </div>
   </div>
+
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import {defineComponent} from 'vue';
 
 export default defineComponent({
-  name: 'form',
+  name: 'formulaire',
   data() {
     return {
       nom: '',
       prenom: '',
+      date: '',
       tel: '',
       mail: '',
       numPermis: '',
+      estimKm: '',
       raisonLocation: '',
       message: '',
+      startDate: this.$route.query.start,
+      endDate: this.$route.query.end,
+      showError: false,
+      responseResId: '',
     };
   },
   methods: {
-    submitForm() {
+    async submitForm() {
       // Check if any of the required fields are empty
       if (
           !this.nom ||
           !this.prenom ||
+          !this.date ||
           !this.tel ||
           !this.mail ||
           !this.numPermis ||
-          !this.raisonLocation
+          !this.estimKm ||
+          !this.raisonLocation ||
+          !this.startDate ||
+          !this.endDate
       ) {
         // If any required field is empty, do not proceed with form submission
         console.log('Please fill in all required fields before submitting.');
-        this.$router.push({ path: "/reservation/paiement" });
+        this.showError = true;
         return;
+      } else {
+        // Proceed with form submission if all required fields are filled
+        console.log(
+            'Données du formulaire:',
+            this.nom,
+            this.prenom,
+            this.date,
+            this.tel,
+            this.mail,
+            this.numPermis,
+            this.estimKm,
+            this.raisonLocation,
+            this.message,
+            this.startDate,
+            this.endDate
+        )
       }
-
-      // Proceed with form submission if all required fields are filled
-      console.log(
-          'Données du formulaire:',
-          this.nom,
-          this.prenom,
-          this.tel,
-          this.mail,
-          this.numPermis,
-          this.raisonLocation,
-          this.message
-      );
+      await this.createUser();
+      await this.createReservation();
       // Réinitialiser le formulaire après soumission
       this.resetForm();
+      this.$router.push({
+        path: "/reservation/paiement",
+        query: {
+          resaID: this.responseResId
+        }
+      });
+    },
+    async createUser() {
+      await $fetch('/api/users', {
+        method: "POST",
+        body: {
+          "birthDate": this.date,
+          "email": this.mail,
+          "firstName": this.nom,
+          "lastName": this.prenom,
+          "licenseNumber": this.numPermis
+        }
+      })
+    },
+    async createReservation() {
+      const response = await $fetch('/api/reservations', {
+        method: "POST",
+        body: {
+          "actualKm": 0,
+          "estimateKm": this.estimKm,
+          "licenseId": this.numPermis,
+          "locationEnd": this.endDate,
+          "locationStart": this.startDate,
+          //TODO get price from listVehicles
+          "price": 0,
+          "status": "PENDING",
+          //TODO get vehicles id from listVehicles
+          "vehicleId": "string"
+        }
+      })
+      if (response) {
+        this.responseResId = response.id;
+      }
     },
     resetForm() {
       this.nom = '';
       this.prenom = '';
+      this.date = '';
       this.tel = '';
       this.mail = '';
       this.numPermis = '';
+      this.estimKm = '';
       this.raisonLocation = '';
       this.message = '';
     },
