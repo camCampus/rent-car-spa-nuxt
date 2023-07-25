@@ -64,8 +64,7 @@ export default defineComponent({
             class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             id="start-date" type="date" placeholder="Date début" v-model="startDate" >
 
-            class="appearance-none block w-full bg-colorSecondary text-colorTextLight border border-colorNuxt-green rounded py-3 px-4"
-            id="start-date" type="date" placeholder="Date début">
+
 
       </div>
 
@@ -78,8 +77,6 @@ export default defineComponent({
             class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             id="end-date" type="date" placeholder="Date fin" v-model="endDate">
 
-            class="appearance-none block w-full bg-colorSecondary text-colorTextLight border border-colorNuxt-green rounded py-3 px-4"
-            id="end-date" type="date" placeholder="Date fin">
 
       </div>
 
