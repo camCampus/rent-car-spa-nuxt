@@ -45,7 +45,7 @@ export default defineComponent({
         </label>
         <div class="relative">
           <select
-              class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded"
+              class="block appearance-none w-full bg-colorSecondary border border-colorNuxt-green text-colorTextLight py-3 px-4 pr-8 rounded"
               id="city">
             <option>Annecy</option>
             <option>Aix-les-bains</option>
@@ -60,8 +60,13 @@ export default defineComponent({
           Date début
         </label>
         <input
+
             class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             id="start-date" type="date" placeholder="Date début" v-model="startDate" >
+
+            class="appearance-none block w-full bg-colorSecondary text-colorTextLight border border-colorNuxt-green rounded py-3 px-4"
+            id="start-date" type="date" placeholder="Date début">
+
       </div>
 
       <div class="md:w-1/3 px-3 mt-2">
@@ -69,8 +74,13 @@ export default defineComponent({
           Date fin
         </label>
         <input
+
             class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             id="end-date" type="date" placeholder="Date fin" v-model="endDate">
+
+            class="appearance-none block w-full bg-colorSecondary text-colorTextLight border border-colorNuxt-green rounded py-3 px-4"
+            id="end-date" type="date" placeholder="Date fin">
+
       </div>
 
     </div>

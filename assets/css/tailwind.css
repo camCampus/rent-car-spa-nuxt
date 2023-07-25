@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    h1 {
+        @apply font-heading;
+    }
+    h2 {
+        @apply font-heading;
+    }
+}
 /*.btn {*/
 /*    margin: 2rem;*/
 /*    padding: 1.5rem;*/
