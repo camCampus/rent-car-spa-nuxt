@@ -2,7 +2,31 @@
 import {defineComponent} from 'vue'
 
 export default defineComponent({
-  name: "paiement"
+  name: "paiement",
+  data() {
+    return {
+      resaID: this.$route.query.resaID
+    }
+  },
+  methods: {
+    async validateResa() {
+      const response = await $fetch('/api/reservations', {
+        method: "POST",
+        body: {
+          "actualKm": 0,
+          "estimateKm": this.estimKm,
+          "licenseId": this.numPermis,
+          "locationEnd": this.endDate,
+          "locationStart": this.startDate,
+          //TODO get price from listVehicles
+          "price": 0,
+          "status": "PENDING",
+          //TODO get vehicles id from listVehicles
+          "vehicleId": "string"
+        }
+      })
+    }
+  }
 })
 </script>
 
