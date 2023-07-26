@@ -46,6 +46,9 @@ export default defineNuxtConfig({
         },
         '/api/reservations/**': {
             proxy: {to:"http://172.10.230.10:8083/reservations/**"}
+        },
+        '/api/types': {
+            proxy: {to:"http://172.10.230.20:8082/types"}
         }
     }
 })

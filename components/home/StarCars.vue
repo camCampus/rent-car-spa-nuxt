@@ -15,8 +15,8 @@ export default defineComponent({
         <!-- Remplacez les blocs ci-dessous par les détails réels de vos voitures en vedette -->
 
         <card :cars-url="'/208.png'"/>
-        <card :cars-url="'/clio4.png'"/>
-        <card :cars-url="'/clio4.png'"/>
+        <card :cars-url="'/CLIO.png'"/>
+        <card :cars-url="'/CLIO.png'"/>
 
       </div>
     </div>
