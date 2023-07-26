@@ -1,40 +1,3 @@
-<script>
-import {defineComponent} from 'vue'
-import {useReservationStore} from "~/stores/reservations";
-export default defineComponent({
-  name: "ReservationSetup",
-  setup() {
-    const reservationStore = useReservationStore()
-    return {reservationStore}
-  },
-  data() {
-    return {
-      startDate:'',
-      endDate: '',
-    }
-  },
-  methods: {
-     async getAvailableCars() {
-      if (this.startDate !== '' && this.endDate !== '') {
-         this.redirectToPage()
-      } else {
-
-      }
-    },
-    redirectToPage() {
-      // Remplacez '/autre-page' par le chemin de la page vers laquelle vous souhaitez rediriger.
-      this.$router.push({
-        path:'/reservation/listVehicles',
-        query: {
-          start: this.startDate,
-          end: this.endDate
-        }
-      });
-    }
-  }
-})
-</script>
-
 <template>
   <div class="backdrop-blur-sm text-black shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col -mt-10">
 
@@ -92,6 +55,39 @@ export default defineComponent({
   </div>
 </template>
 
-<style scoped>
+<script>
+import {defineComponent} from 'vue'
+import {useReservationStore} from "~/stores/reservations";
+export default defineComponent({
+  name: "ReservationSetup",
+  setup() {
+    const reservationStore = useReservationStore()
+    return {reservationStore}
+  },
+  data() {
+    return {
+      startDate:'',
+      endDate: '',
+    }
+  },
+  methods: {
+    async getAvailableCars() {
+      if (this.startDate !== '' && this.endDate !== '') {
+        this.redirectToPage()
+      } else {
 
-</style>
+      }
+    },
+    redirectToPage() {
+      // Remplacez '/autre-page' par le chemin de la page vers laquelle vous souhaitez rediriger.
+      this.$router.push({
+        path:'/reservation/listVehicles',
+        query: {
+          start: this.startDate,
+          end: this.endDate
+        }
+      });
+    }
+  }
+})
+</script>

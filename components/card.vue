@@ -11,16 +11,13 @@
       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Prix par jour: {{ item["basePrice"] }} €</p>
       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Prix par kilometre: {{ item["kilometerPrice"] }}
         €</p>
-      <a class="text-center bg-colorNuxt-green btn text-colorTextLight m-2 p-2">
+      <a @click="redirectToPage" class="text-center bg-colorNuxt-green btn text-colorTextLight m-2 p-2">
         En savoir plus
-
       </a>
     </div>
   </div>
 </template>
 <script>
-import {useReservationStore} from "~/stores/reservations";
-
 export default {
   name: "cardComponent",
   props: {
@@ -28,10 +25,26 @@ export default {
     model: String,
     item: Object
   },
+  data() {
+    return {
+      startDate: this.$route.query.start,
+      endDate: this.$route.query.end,
+    }
+  },
   methods: {
+    redirectToPage() {
+      // Remplacez '/autre-page' par le chemin de la page vers laquelle vous souhaitez rediriger.
+      this.$router.push({
+        path:'/reservation/formulaire',
+        query: {
+          start: this.startDate,
+          end: this.endDate
+        }
+      });
+    },
     getVehicleImg() {
       return "/images/" + this.model + ".png"
     },
-  }
+  },
 }
 </script>
