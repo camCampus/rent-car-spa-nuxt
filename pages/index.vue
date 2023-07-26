@@ -1,7 +1,7 @@
 <template>
   <body class="bg-colorBackground">
 
-  <!-- Section principale -->
+<!--  &lt;!&ndash; Section principale &ndash;&gt;-->
   <main-block />
 
   <!-- Section des voitures en vedette -->

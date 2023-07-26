@@ -14,9 +14,9 @@ export default defineComponent({
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Remplacez les blocs ci-dessous par les détails réels de vos voitures en vedette -->
 
-        <card :cars-url="'/208.png'"/>
-        <card :cars-url="'/CLIO.png'"/>
-        <card :cars-url="'/CLIO.png'"/>
+        <home-card-star-cars :cars-url="'/208.png'"/>
+        <home-card-star-cars :cars-url="'/CLIO.png'"/>
+        <home-card-star-cars :cars-url="'/CLIO.png'"/>
 
       </div>
     </div>
