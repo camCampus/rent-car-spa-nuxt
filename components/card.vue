@@ -11,14 +11,19 @@
       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Prix par jour: {{ item["basePrice"] }} €</p>
       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Prix par kilometre: {{ item["kilometerPrice"] }}
         €</p>
-      <a @click="redirectToPage" class="text-center bg-colorNuxt-green btn text-colorTextLight m-2 p-2">
+      <button @click="getUserSelection(item)" class="text-center bg-colorNuxt-green btn text-colorTextLight m-2 p-2">
         En savoir plus
-      </a>
+      </button>
     </div>
   </div>
 </template>
 <script>
+import {useReservationStore} from "~/stores/reservations";
 export default {
+  setup() {
+    const reservationStore = useReservationStore()
+    return {reservationStore}
+  },
   name: "cardComponent",
   props: {
     carsUrl: String,
@@ -35,7 +40,7 @@ export default {
     redirectToPage() {
       // Remplacez '/autre-page' par le chemin de la page vers laquelle vous souhaitez rediriger.
       this.$router.push({
-        path:'/reservation/formulaire',
+        path: '/reservation/formulaire',
         query: {
           start: this.startDate,
           end: this.endDate
@@ -45,6 +50,10 @@ export default {
     getVehicleImg() {
       return "/images/" + this.model + ".png"
     },
+    getUserSelection(item) {
+      this.reservationStore.userVehicleSelection = JSON.stringify(item);
+      this.redirectToPage()
+    }
   },
 }
 </script>

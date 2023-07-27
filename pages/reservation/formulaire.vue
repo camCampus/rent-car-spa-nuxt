@@ -129,13 +129,23 @@
       {{ error }}
     </div>
   </div>
-
+{{d}}
 </template>
 
 <script>
 import {defineComponent} from 'vue';
+import {useReservationStore} from "~/stores/reservations";
 
 export default defineComponent({
+  setup(){
+    const reservationStore = useReservationStore()
+    return {reservationStore}
+  },
+  computed: {
+    d() {
+      return this.reservationStore.userVehicleSelection
+    }
+  },
   name: 'formulaire',
   data() {
     return {
