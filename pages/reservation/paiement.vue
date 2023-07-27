@@ -10,21 +10,23 @@ export default defineComponent({
   },
   methods: {
     async validateResa() {
-      const response = await $fetch('/api/reservations', {
-        method: "POST",
+      await $fetch('/api/reservations/status/' + this.resaID, {
+        method: "PUT",
         body: {
-          "actualKm": 0,
-          "estimateKm": this.estimKm,
-          "licenseId": this.numPermis,
-          "locationEnd": this.endDate,
-          "locationStart": this.startDate,
-          //TODO get price from listVehicles
-          "price": 0,
-          "status": "PENDING",
-          //TODO get vehicles id from listVehicles
-          "vehicleId": "string"
+          "id": this.resaID,
+          "status": "VALIDATED",
         }
       })
+      this.redirect();
+    },
+    redirect() {
+      this.$router.push({
+        path: "/reservation/validation",
+        //Should get a reservation number created in the back, but we forget it in API, so, use id (Big issue :))
+        query: {
+          resaID: this.resaID
+        }
+      });
     }
   }
 })
@@ -34,6 +36,6 @@ export default defineComponent({
 <div class="paiement_container h-screen w-screen flex flex-col justify-center items-center bg-colorSecondary text-center">
   <h1 class="m-5">Le sysème de paiement sera implémenté plus tard</h1>
   <nuxt-link class="btn" to="/">Accueil</nuxt-link>
-  <nuxt-link class="btn mt-4" to="/reservation/validation">Validation</nuxt-link>
+  <a @click="validateResa" class="btn mt-4">Validation</a>
 </div>
 </template>

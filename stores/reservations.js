@@ -5,13 +5,17 @@ import {useStorage} from '@vueuse/core'
 export const useReservationStore = defineStore('reservations', {
     state: () => ({
         baseUrl: 'http://172.10.230.10:80823',
+        allReservations: [],
         vehiclesList: [],
         priceList: [],
         vehiclesWithPrice: [],
         userVehicleSelection:useStorage('userVehicleSelection', null, localStorage)
     }),
     actions: {
-        async getVehiclesForDates(start, end) {
+        async allReservation() {
+            this.allReservations = await reservationRepository.getAllReservation()
+        }
+        ,async getVehiclesForDates(start, end) {
             this.vehiclesList = await reservationRepository.getForUserDates(start, end)
         },
         async getPrice() {

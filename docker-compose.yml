@@ -19,7 +19,7 @@ services:
 
 
   reservation:
-    image: camcampus/rent_car_reservation_service_copy_sql:first
+    image: camcampus/rent_car_reservation_service-v3:first
     networks:
       spring:
         ipv4_address: 172.10.230.10
@@ -60,7 +60,7 @@ services:
       - mysql-vehicle
 
   user:
-    image: camcampus/rent-uuu-service:first
+    image: camcampus/rent-user-service-v2:first
     networks:
       spring:
         ipv4_address: 172.10.230.30
