@@ -1,13 +1,14 @@
 import {defineStore} from "pinia";
 import reservationRepository from "~/repository/reservationRepository";
 import vehicleRepository from "~/repository/vehicleRepository";
-
+import {useStorage} from '@vueuse/core'
 export const useReservationStore = defineStore('reservations', {
     state: () => ({
         baseUrl: 'http://172.10.230.10:80823',
         vehiclesList: [],
         priceList: [],
-        vehiclesWithPrice: []
+        vehiclesWithPrice: [],
+        userVehicleSelection:useStorage('userVehicleSelection', null, localStorage)
     }),
     actions: {
         async getVehiclesForDates(start, end) {
