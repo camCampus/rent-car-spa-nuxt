@@ -129,7 +129,7 @@
       {{ error }}
     </div>
   </div>
-{{d}}
+{{selectedVehicle.registration}}
 </template>
 
 <script>
@@ -138,24 +138,20 @@ import {useReservationStore} from "~/stores/reservations";
 
 export default defineComponent({
   setup(){
-    const reservationStore = useReservationStore()
-    return {reservationStore}
-  },
-  computed: {
-    d() {
-      return this.reservationStore.userVehicleSelection
-    }
+    const selectedVehicle = JSON.parse(useReservationStore().userVehicleSelection)
+    console.log(selectedVehicle)
+    return {selectedVehicle}
   },
   name: 'formulaire',
   data() {
     return {
-      nom: 'test',
-      prenom: 'test',
-      date: '03-12-1992',
+      nom: 'test100',
+      prenom: 'test100',
+      date: '03-12-1990',
       tel: '2145785693',
-      mail: 'mail@mail.fr',
+      mail: 'test100@mail.fr',
       numPermis: '',
-      estimKm: '7452',
+      estimKm: '500',
       raisonLocation: 'Autre',
       message: '',
       startDate: this.$route.query.start,
@@ -250,11 +246,9 @@ export default defineComponent({
           "licenseId": this.numPermis,
           "locationEnd": this.endDate,
           "locationStart": this.startDate,
-          //TODO get price from listVehicles
-          "price": 0,
+          "price": this.selectedVehicle.basePrice,
           "status": "PENDING",
-          //TODO get vehicles id from listVehicles
-          "vehicleId": "string"
+          "vehicleId": this.selectedVehicle.registration
         }
       })
       //TODO Si réponse = permis invalide, return là et soulève erreur

@@ -1,16 +1,15 @@
 <template>
-  <header>
-    <nav-bar />
-  </header>
+    <header>
+      <nav-bar/>
+    </header>
 
-  <main>
-    <slot />
-  </main>
+    <main>
+      <slot/>
+    </main>
 
-  <footer>
-    <footerr />
-  </footer>
-
+    <footer>
+      <footerr/>
+    </footer>
 </template>
 
 <script>
