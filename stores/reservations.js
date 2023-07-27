@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import reservationRepository from "~/repository/reservationRepository";
 import vehicleRepository from "~/repository/vehicleRepository";
 import {useStorage} from '@vueuse/core'
+
 export const useReservationStore = defineStore('reservations', {
     state: () => ({
         baseUrl: 'http://172.10.230.10:80823',
@@ -9,10 +10,11 @@ export const useReservationStore = defineStore('reservations', {
         vehiclesList: [],
         priceList: [],
         vehiclesWithPrice: [],
-        userVehicleSelection:useStorage('userVehicleSelection', null, localStorage)
+        userVehicleSelection:useStorage('userVehicleSelection', null, localStorage),
+        reservationId:useStorage('reservationID', null, localStorage)
     }),
     actions: {
-        async allReservation() {
+        async getReservationList() {
             this.allReservations = await reservationRepository.getAllReservation()
         }
         ,async getVehiclesForDates(start, end) {
@@ -35,6 +37,26 @@ export const useReservationStore = defineStore('reservations', {
             this.vehiclesList = v;
             let p = await vehicleRepository.getVehiclesTypes();
             await this.getVehicleWithPrice(p, v)
+        },
+
+        async addNewResa(vehicle, startDate, endDate) {
+            let resa = {
+                "actualKm": 0,
+                "estimateKm":0,
+                "licenseId": 0,
+                "locationEnd": startDate,
+                "locationStart": endDate,
+                "price": vehicle["price"],
+                "status": "PENDING",
+                "vehicleId": vehicle["registration"]
+            }
+            let res = await reservationRepository.createReservation(resa)
+            this.reservationId = JSON.stringify(res["id"])
+
+        },
+
+        async getResaById() {
+            return await reservationRepository.getReservationById(JSON.parse(this.reservationId))
         }
     }
 })
