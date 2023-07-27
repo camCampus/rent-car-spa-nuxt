@@ -30,6 +30,7 @@
         </div>
 
         <div class="mb-4">
+          <!--              TODO le calandrier a une dat mini à aujourd'hui https://developer.mozilla.org/fr/docs/Web/HTML/Element/input/date -->
           <label for="date" class=" font-medium mb-1">Date de naissance :</label>
           <input
               type="date"
@@ -138,14 +139,14 @@ export default defineComponent({
   name: 'formulaire',
   data() {
     return {
-      nom: '',
-      prenom: '',
-      date: '',
-      tel: '',
-      mail: '',
+      nom: 'test',
+      prenom: 'test',
+      date: '03-12-1992',
+      tel: '2145785693',
+      mail: 'mail@mail.fr',
       numPermis: '',
-      estimKm: '',
-      raisonLocation: '',
+      estimKm: '7452',
+      raisonLocation: 'Autre',
       message: '',
       startDate: this.$route.query.start,
       endDate: this.$route.query.end,
@@ -157,6 +158,7 @@ export default defineComponent({
   methods: {
     async submitForm() {
       // Check if any of the required fields are empty
+      this.error = ""
       if (
           !this.nom ||
           !this.prenom ||
@@ -177,11 +179,13 @@ export default defineComponent({
         this.error = "Format de email non valide";
         this.showError = true;
         return;
-      } else if (!this.validSringOnly(this.nom) || !this.validSringOnly(this.prenom)) {
+      }
+      else if (!this.validSringOnly(this.nom) || !this.validSringOnly(this.prenom)) {
         this.error = "Nom ou Prénom ne peuvent contenir que des lettres";
         this.showError = true;
         return;
-      } else if (!this.validIntOnly(this.numPermis) || !this.validSringOnly(this.estimKm)) {
+      }
+      else if (!this.validIntOnly(this.numPermis) || !this.validIntOnly(this.estimKm)) {
         this.error = "Numéro de permis ou estimatimation des kilomètres ne peuvent contenir que des nombres";
         this.showError = true;
         return;
@@ -268,7 +272,6 @@ export default defineComponent({
       const re = /^[a-zA-Z]+$/;
       return re.test(str);
     },
-    //TODO INVALID regex (sors invalide number même si number valide)
     validIntOnly(int) {
       const re = /^\d+$/;
       return re.test(int);
