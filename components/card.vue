@@ -4,13 +4,14 @@
     <img class="object-scale-down h-40 w-full" :src="getVehicleImg()" alt=""/>
     <div class="p-5 flex flex-col flex-nowrap items-center">
       <h5 class="mb-2 block text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        {{ item["brand"].toUpperCase() }}, </h5>
+        {{ item["brand"].toUpperCase() }} </h5>
       <h5 class="mb-2 block text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         {{ item["model"].toUpperCase() }} </h5>
       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Description</p>
       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Prix par jour: {{ item["basePrice"] }} €</p>
       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Prix par kilometre: {{ item["kilometerPrice"] }}
         €</p>
+<!--      {{ item }}-->
       <button @click="getUserSelection(item)" class="text-center bg-colorNuxt-green btn text-colorTextLight m-2 p-2">
         En savoir plus
       </button>
@@ -27,7 +28,6 @@ export default {
   name: "cardComponent",
   props: {
     carsUrl: String,
-    model: String,
     item: Object
   },
   data() {
@@ -38,7 +38,6 @@ export default {
   },
   methods: {
     redirectToPage() {
-      // Remplacez '/autre-page' par le chemin de la page vers laquelle vous souhaitez rediriger.
       this.$router.push({
         path: '/reservation/formulaire',
         query: {
@@ -48,7 +47,7 @@ export default {
       });
     },
     getVehicleImg() {
-      return "/images/" + this.model + ".png"
+      return "/images/" + this.item["model"] + ".png"
     },
     getUserSelection(item) {
       this.reservationStore.userVehicleSelection = JSON.stringify(item);

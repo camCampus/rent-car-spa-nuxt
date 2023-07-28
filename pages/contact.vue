@@ -2,10 +2,10 @@
 <template>
   <div class="min-h-screen flex items-center justify-center">
     <div class="w-full max-w-md p-8 bg-colorSecondary rounded-lg shadow-md">
-      <h2 class="text-3xl font-bold mb-4">Contactez-nous</h2>
+      <h2 class="text-3xl text-center font-bold mb-4">Contactez-nous</h2>
       <form @submit.prevent="submitForm">
         <div class="mb-4">
-          <label for="name" class="block text-sm font-medium">Nom</label>
+          <label for="name" class="block font-bold text-s">Nom</label>
           <input
               type="text"
               id="name"
@@ -15,7 +15,7 @@
           />
         </div>
         <div class="mb-4">
-          <label for="email" class="block text-sm font-medium">Email</label>
+          <label for="email" class="block text-sm font-bold">Email</label>
           <input
               type="email"
               id="email"
@@ -25,7 +25,7 @@
           />
         </div>
         <div class="mb-4">
-          <label for="message" class="block text-sm font-medium">Message</label>
+          <label for="message" class="block text-sm font-bold">Message</label>
           <textarea
               id="message"
               v-model="formData.message"
@@ -35,7 +35,7 @@
           ></textarea>
         </div>
         <div class="mt-4">
-          <button type="submit" class="w-full px-4 py-2 text-white font-semibold bg-blue-500 rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
+          <button type="submit" class="w-full px-4 py-2 text-white font-semibold bg-colorNuxt-green rounded-md shadow-md hover:bg-colorPrimary focus:outline-none focus:ring focus:ring-blue-200 btn">
             Envoyer
           </button>
         </div>

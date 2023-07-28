@@ -38,7 +38,7 @@ export default defineComponent({
 
     <div id="container" class="flex flex-wrap w-full ">
       <div v-for="item in sortResult()" class=" flex justify-center items-center sm:basis-1/3 lg:basis-1/4">
-        <card :model="item.model" :item="item"/>
+        <card :item="item"/>
       </div>
     </div>
   </div>
