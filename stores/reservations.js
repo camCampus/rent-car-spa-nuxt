@@ -57,6 +57,15 @@ export const useReservationStore = defineStore('reservations', {
 
         async getResaById() {
             return await reservationRepository.getReservationById(JSON.parse(this.reservationId))
-        }
+        },
+
+        async addLicenseIdToReservation(license) {
+            try {
+                const res = await reservationRepository.reservationLicenseIdUpdate(license, JSON.parse(this.reservationId))
+            } catch (e) {
+                console.log(e)
+            }
+
+                    }
     }
 })

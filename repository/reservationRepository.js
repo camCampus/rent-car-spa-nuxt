@@ -17,4 +17,14 @@ export default class reservationRepository {
     static async getReservationById(id) {
         return await $fetch('/api/reservations/' + id)
     }
+
+    static async reservationLicenseIdUpdate(license, id){
+        return await $fetch('/api/reservations/user/license', {
+            method: "PUT",
+            body: {
+                "id":id,
+                "licenseId":license
+            }
+        })
+    }
 }

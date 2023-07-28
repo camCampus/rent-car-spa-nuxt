@@ -1,22 +1,26 @@
 <script>
 import {defineComponent} from 'vue'
+import {useReservationStore} from "~/stores/reservations";
+import ReservationOverview from "~/components/validation/reservation-overview.vue";
 
 export default defineComponent({
+  components: {ReservationOverview},
+  setup() {
+    const reservationStore = useReservationStore()
+    return {reservationStore}
+  },
+  async created() {
+    this.reservation =  await this.reservationStore.getResaById()
+  },
   name: "paiement",
   data() {
     return {
-      resaID: this.$route.query.resaID
+      reservation: ""
+      //resaID: this.$route.query.resaID
     }
   },
   methods: {
-    async validateResa() {
-      await $fetch('/api/reservations/status/' + this.resaID, {
-        method: "PUT",
-        body: {
-          "id": this.resaID,
-          "status": "VALIDATED",
-        }
-      })
+     validateResa() {
       this.redirect();
     },
     redirect() {
@@ -33,7 +37,11 @@ export default defineComponent({
 </script>
 
 <template>
+{{reservation}}
 <div class="paiement_container h-screen w-screen flex flex-col justify-center items-center bg-colorSecondary text-center">
+  <div>
+    <reservation-overview/>
+  </div>
   <h1 class="m-5">Le sysème de paiement sera implémenté plus tard</h1>
   <nuxt-link class="btn" to="/">Accueil</nuxt-link>
   <a @click="validateResa" class="btn mt-4">Validation</a>

@@ -129,7 +129,6 @@
       {{ error }}
     </div>
   </div>
-{{selectedVehicle.registration}}
 </template>
 
 <script>
@@ -140,7 +139,6 @@ export default defineComponent({
   setup(){
     const selectedVehicle = JSON.parse(useReservationStore().userVehicleSelection)
     const reservationStore = useReservationStore()
-    console.log(selectedVehicle)
     return {selectedVehicle, reservationStore}
   },
   name: 'formulaire',
@@ -216,16 +214,14 @@ export default defineComponent({
           this.endDate
       )
       await this.createUser();
-      let resa = this.reservationStore.getResaById()
-      resa["licenseId"] = this.numPermis
-      this.responseResId = resa
+      this.reservationStore.addLicenseIdToReservation(this.numPermis)
       //await this.createReservation();
       //Réinitialiser le formulaire après soumission
       this.resetForm();
       this.$router.push({
         path: "/reservation/paiement",
         query: {
-          resaID: this.responseResId
+          //resaID: this.responseResId
         }
      });
 
