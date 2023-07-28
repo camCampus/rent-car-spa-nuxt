@@ -14,6 +14,9 @@ export const useReservationStore = defineStore('reservations', {
         reservationId:useStorage('reservationID', null, localStorage)
     }),
     actions: {
+        async allReservation() {
+            this.allReservations = await reservationRepository.getAllReservation()
+        },
         async getReservationList() {
             return await reservationRepository.getAllReservation()
         }

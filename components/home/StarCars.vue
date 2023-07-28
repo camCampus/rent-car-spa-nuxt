@@ -8,13 +8,8 @@
         <div v-for="model in top3model" :key="model">
           <home-card-star-cars :cars-url="`/images/${model}.png`"/>
         </div>
-<!--        {{ vehicles }}-->
-<!--        <p>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
-<!--        {{ prices }}-->
-
       </div>
     </div>
-    {{reservationStore.allReservations}}
   </section>
 </template>
 
