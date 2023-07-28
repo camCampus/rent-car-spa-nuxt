@@ -15,7 +15,7 @@ export const useReservationStore = defineStore('reservations', {
     }),
     actions: {
         async getReservationList() {
-            this.allReservations = await reservationRepository.getAllReservation()
+            return await reservationRepository.getAllReservation()
         }
         ,async getVehiclesForDates(start, end) {
             this.vehiclesList = await reservationRepository.getForUserDates(start, end)

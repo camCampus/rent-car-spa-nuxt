@@ -6,12 +6,13 @@
       <h2 class="text-2xl font-bold m-2 mb-8">Voitures en vedette</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Remplacez les blocs ci-dessous par les détails réels de vos voitures en vedette -->
-<!--        <home-card-star-cars :cars-url="'/images/TRAFIC.png'"/>-->
-<!--        <home-card-star-cars :cars-url="'/images/CLIO.png'"/>-->
-<!--        <home-card-star-cars :cars-url="'/images/CLIO.png'"/>-->
+        <home-card-star-cars :cars-url="'/images/TRAFIC.png'"/>
+        <home-card-star-cars :cars-url="'/images/CLIO.png'"/>
+        <home-card-star-cars :cars-url="'/images/CLIO.png'"/>
 
       </div>
     </div>
+    {{reservationStore.allReservations}}
   </section>
 </template>
 
@@ -26,7 +27,6 @@ export default defineComponent({
   },
   name: "StarCars",
   created() {
-    this.reservationStore.getReservationList();
     this.findMustReservedVehicles()
   },
   data() {
@@ -36,18 +36,17 @@ export default defineComponent({
     }
   },
   methods: {
-     findMustReservedVehicles() {
-      console.log('je passe')
-      this.reservations = this.reservationStore.allReservations
-      console.log(this.reservations)
+       async findMustReservedVehicles() {
+        let list = await this.reservationStore.getReservationList()
+         console.log(list)
       // const tab = []
       // this.vehicles.forEach(ele => console.log(ele))
-      for (let i =0; i < this.reservations.length; )
-      for (const vehicle in this.reservations) {
-        console.log('dans la loop')
-        console.log(vehicle);
+      // for (let i =0; i < this.reservations.length; )
+      // for (const vehicle in this.reservations) {
+      //   console.log('dans la loop')
+      //   console.log(vehicle);
         // tab.push(vehicle)
-      }
+      //}
       // return tab
     }
   }
