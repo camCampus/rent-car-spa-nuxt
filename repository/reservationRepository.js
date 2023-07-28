@@ -18,12 +18,14 @@ export default class reservationRepository {
         return await $fetch('/api/reservations/' + id)
     }
 
-    static async reservationLicenseIdUpdate(license, id){
-        return await $fetch('/api/reservations/user/license', {
+    static async reservationLicenseIdUpdate(license, id, km, price){
+        return await $fetch('/api/reservations/form/data', {
             method: "PUT",
             body: {
                 "id":id,
-                "licenseId":license
+                "licenseId":license,
+                "actualKm":null,
+                "price":price,
             }
         })
     }

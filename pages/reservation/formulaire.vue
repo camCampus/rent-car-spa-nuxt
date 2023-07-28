@@ -144,14 +144,14 @@ export default defineComponent({
   name: 'formulaire',
   data() {
     return {
-      nom: 'test',
-      prenom: 'test',
-      date: '03-12-1990',
-      tel: '2145785693',
-      mail: 'test100@mail.fr',
-      numPermis: '45245242452',
-      estimKm: '500',
-      raisonLocation: 'Autre',
+      nom: '',
+      prenom: '',
+      date: '',
+      tel: '',
+      mail: 'mail@test.fr',
+      numPermis: '',
+      estimKm: '',
+      raisonLocation: '',
       message: '',
       startDate: this.$route.query.start,
       endDate: this.$route.query.end,
@@ -214,7 +214,8 @@ export default defineComponent({
           this.endDate
       )
       await this.createUser();
-      this.reservationStore.addLicenseIdToReservation(this.numPermis)
+      let price = this.selectedVehicle["kilometerPrice"] * this.estimKm
+      this.reservationStore.addLicenseIdToReservation(this.numPermis, this.estimKm, price)
       //await this.createReservation();
       //Réinitialiser le formulaire après soumission
       this.resetForm();
