@@ -129,7 +129,6 @@
       {{ error }}
     </div>
   </div>
-{{selectedVehicle.registration}}
 </template>
 
 <script>
@@ -139,18 +138,18 @@ import {useReservationStore} from "~/stores/reservations";
 export default defineComponent({
   setup(){
     const selectedVehicle = JSON.parse(useReservationStore().userVehicleSelection)
-    console.log(selectedVehicle)
-    return {selectedVehicle}
+    const reservationStore = useReservationStore()
+    return {selectedVehicle, reservationStore}
   },
   name: 'formulaire',
   data() {
     return {
-      nom: 'test100',
-      prenom: 'test100',
+      nom: 'test',
+      prenom: 'test',
       date: '03-12-1990',
       tel: '2145785693',
       mail: 'test100@mail.fr',
-      numPermis: '',
+      numPermis: '45245242452',
       estimKm: '500',
       raisonLocation: 'Autre',
       message: '',
@@ -215,15 +214,18 @@ export default defineComponent({
           this.endDate
       )
       await this.createUser();
-      await this.createReservation();
-      // Réinitialiser le formulaire après soumission
-      // this.resetForm();
+      this.reservationStore.addLicenseIdToReservation(this.numPermis)
+      //await this.createReservation();
+      //Réinitialiser le formulaire après soumission
+      this.resetForm();
       this.$router.push({
         path: "/reservation/paiement",
         query: {
-          resaID: this.responseResId
+          //resaID: this.responseResId
         }
-      });
+     });
+
+
     },
     async createUser() {
       await $fetch('/api/users', {

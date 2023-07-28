@@ -51,6 +51,7 @@ export default {
     },
     getUserSelection(item) {
       this.reservationStore.userVehicleSelection = JSON.stringify(item);
+      this.reservationStore.addNewResa(item, this.startDate, this.endDate)
       this.redirectToPage()
     }
   },

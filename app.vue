@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="root-wrapper" class="min-h-screen">
     <NuxtLayout>
       <NuxtPage/>
     </NuxtLayout>
@@ -7,14 +7,5 @@
 </template>
 
 <script>
-import {useUserStore} from '/stores/users'
-export default {
-  setup() {
-    const uStore = useUserStore()
-    return {uStore}
-  },
-   created() {
-     this.uStore.getAllUsers()
-  },
-}
+
 </script>

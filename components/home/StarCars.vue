@@ -3,6 +3,7 @@
     <div class="container mx-auto">
       <h2 class="text-2xl font-bold m-2 mb-8">Voitures en vedette</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
 <!--        TODO Implémenter les props avec les data pour les cards-->
         <div v-for="model in top3model" :key="model">
           <home-card-star-cars :cars-url="`/images/${model}.png`"/>
@@ -10,24 +11,34 @@
 <!--        {{ vehicles }}-->
 <!--        <p>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
 <!--        {{ prices }}-->
+
       </div>
     </div>
+    {{reservationStore.allReservations}}
   </section>
 </template>
 
 <script>
 import {defineComponent} from 'vue'
+
 import {useReservationStore} from "../../stores/reservations";
 import {useVehicleStore} from "../../stores/vehicles";
 
+
 export default defineComponent({
+  setup() {
+    const reservationStore = useReservationStore()
+    return {reservationStore}
+  },
   name: "StarCars",
+
   async created() {
     await useVehicleStore().getAllVehicles();
     await useReservationStore().allReservation();
     await useReservationStore().getPrice();
     await this.findMustReservedVehicles();
     await this.getPrices();
+
   },
   data() {
     return {
@@ -38,6 +49,7 @@ export default defineComponent({
     }
   },
   methods: {
+
 
     sortResult() {
       return this.useReservationStore.vehiclesWithPrice.reduce((prev, cur) => [
@@ -81,6 +93,7 @@ export default defineComponent({
       keyValuePairs.sort((a, b) => b[1] - a[1]);
       const resultObj = Object.fromEntries(keyValuePairs.slice(0, 3));
       this.top3model = Object.keys(resultObj);
+
     }
   }
 })
