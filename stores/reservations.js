@@ -58,13 +58,14 @@ export const useReservationStore = defineStore('reservations', {
 
         },
 
-        async getResaById() {
-            return await reservationRepository.getReservationById(JSON.parse(this.reservationId))
+        async getResaById(id) {
+            return await reservationRepository.getReservationById(id)
         },
 
-        async addLicenseIdToReservation(license) {
+        async addLicenseIdToReservation(license, km, price) {
             try {
-                const res = await reservationRepository.reservationLicenseIdUpdate(license, JSON.parse(this.reservationId))
+                const res = await reservationRepository.reservationLicenseIdUpdate(license, JSON.parse(this.reservationId), km, price)
+                console.log('upcall', res)
             } catch (e) {
                 console.log(e)
             }

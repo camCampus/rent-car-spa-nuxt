@@ -10,7 +10,7 @@ export default defineComponent({
     return {reservationStore}
   },
   async created() {
-    this.reservation =  await this.reservationStore.getResaById()
+    //this.reservation =  await this.reservationStore.getResaById()
   },
   name: "paiement",
   data() {
@@ -37,7 +37,6 @@ export default defineComponent({
 </script>
 
 <template>
-{{reservation}}
 <div class="paiement_container h-screen w-screen flex flex-col justify-center items-center bg-colorSecondary text-center">
   <div>
     <reservation-overview/>
